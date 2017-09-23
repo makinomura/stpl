@@ -45,7 +45,7 @@
 
                     <div class="row placeholders" m-for="index,img in imgs">
                         <div class="col-xs-6 col-sm-3 placeholder">
-                            <img src="{{img.src}}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+                            <img m-ready="setSrc(img.src)" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
                             <h4>{{img.title}}</h4>
                             <span class="text-muted">{{img.desc}}</span>
                         </div>
@@ -116,6 +116,11 @@
                 title: '哈哈',
                 desc: '呵呵'
             }],
+            setSrc: function (src) {
+                return function () {
+                    $(this).attr('src', src);
+                }
+            },
             titles: ['姓名', '性别', '年龄', '分数'],
             items: [{
                 name: '张三',
