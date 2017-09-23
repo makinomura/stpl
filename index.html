@@ -5,55 +5,158 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script src="./stpl.min.js"></script>
+    <title>STPL</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 </head>
 
 <body>
-    <div id="app" m-render>
-        <input type="text" name="name" m-on-change="change">
-        <ul m-for="index,item in items" m-if="{{items.length != 5}}">
-            <li>
-                <ul m-for="i,n in items" m-ready="ready(item)" m-on-click="show('outer :'+item)">
-                    <li m-if="judge(i)" m-on-click="show('inner :'+ n)">{{n}}</li>
-                </ul>
-            </li>
-        </ul>
+
+    <div id="app">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                        aria-controls="navbar">
+                          <span class="sr-only">Toggle navigation</span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                        </button>
+                    <a class="navbar-brand" href="#">STPL DEMO</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right" m-for="index,menu in menus">
+                        <li m-on-click="view(menu)"><a href="{{menu.link}}">{{menu.name}}</a></li>
+                    </ul>
+                    <form class="navbar-form navbar-right">
+                        <input type="text" class="form-control" placeholder="Search...">
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 main">
+                    <h1 class="page-header"></h1>
+                    <h1 class="page-header">Dashboard</h1>
+
+                    <div class="row placeholders" m-for="index,img in imgs">
+                        <div class="col-xs-6 col-sm-3 placeholder">
+                            <img src="{{img.src}}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+                            <h4>{{img.title}}</h4>
+                            <span class="text-muted">{{img.desc}}</span>
+                        </div>
+                    </div>
+
+                    <h2 class="sub-header">表格</h2>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr m-for="index,name in titles">
+                                    <th>{{name}}</th>
+                                </tr>
+                            </thead>
+                            <tbody m-for="index,item in items">
+                                <tr m-on-click="show(item)">
+                                    <td>{{item.name}}</td>
+                                    <td>{{item.sex}}</td>
+                                    <td>{{item.age}}</td>
+                                    <td>{{item.score}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
 </body>
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="./stpl.min.js"></script>
 <script>
     $(function () {
-        var obj = function (n) {
-            var result = [];
-            for (var i = 1; i <= n; i++) {
-                result.push(i);
+        $('#app').render({
+            menus: [{
+                name: '首页',
+                link: '#'
+            }, {
+                name: '设置',
+                link: '#'
+            }, {
+                name: '个人',
+                link: '#'
+            }, {
+                name: '帮助',
+                link: '#'
+            }],
+            view: function (menu) {
+                alert('你点击了菜单 :' + menu.name);
+            },
+            imgs: [{
+                src: 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
+                title: '哈哈',
+                desc: '呵呵'
+            }, {
+                src: 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
+                title: '哈哈',
+                desc: '呵呵'
+            }, {
+                src: 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
+                title: '哈哈',
+                desc: '呵呵'
+            }, {
+                src: 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==',
+                title: '哈哈',
+                desc: '呵呵'
+            }],
+            titles: ['姓名', '性别', '年龄', '分数'],
+            items: [{
+                name: '张三',
+                sex: '男',
+                age: '43',
+                score: 88
+            }, {
+                name: '李四',
+                sex: '男',
+                age: '22',
+                score: 21
+            }, {
+                name: '王五',
+                sex: '男',
+                age: '31',
+                score: 72
+            }, {
+                name: '赵六',
+                sex: '男',
+                age: '23',
+                score: 53
+            }, {
+                name: '黄七',
+                sex: '男',
+                age: '55',
+                score: 85
+            }, {
+                name: '曹八',
+                sex: '男',
+                age: '22',
+                score: 60
+            }, {
+                name: '九九',
+                sex: '男',
+                age: '41',
+                score: 22
+            }],
+            show: function (item) {
+                alert(JSON.stringify(item));
             }
-            return {
-                items: result,
-                show: function (i) {
-                    return function (e) {
-                        alert('show :' + i);
-                        e.stopPropagation();
-                    }
-                },
-                change: function () {
-                    alert('input :' + $(this).val())
-                },
-                ready: function (i) {
-                    console.log('rendered :' + i);
-                    return function () {
-                        console.log($(this).html())
-                    }
-                },
-                judge: function (i) {
-                    return function () {
-                        return (i + 1) % 2 === 0;
-                    }
-                }
-            }
-        };
-        $('#app').render(obj(10));
+        })
     })
 
 </script>
