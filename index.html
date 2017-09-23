@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="./stpl.js"></script>
+</head>
+
+<body>
+    <div id="app" m-render>
+        <input type="text" name="name" m-on-change="change">
+        <ul m-for="index,item in items" m-if="{{items.length != 5}}">
+            <li>
+                <ul m-for="i,n in items" m-ready="ready(item)" m-on-click="show('outer :'+item)">
+                    <li m-if="judge(i)" m-on-click="show('inner :'+ n)">{{n}}</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</body>
+<script>
+    $(function () {
+        var obj = function (n) {
+            var result = [];
+            for (var i = 1; i <= n; i++) {
+                result.push(i);
+            }
+            return {
+                items: result,
+                show: function (i) {
+                    return function (e) {
+                        alert('show :' + i);
+                        e.stopPropagation();
+                    }
+                },
+                change: function () {
+                    alert('input :' + $(this).val())
+                },
+                ready: function (i) {
+                    console.log('rendered :' + i);
+                    return function () {
+                        console.log($(this).html())
+                    }
+                },
+                judge: function (i) {
+                    return function () {
+                        return (i + 1) % 2 === 0;
+                    }
+                }
+            }
+        };
+        $('#app').render(obj(10));
+    })
+
+</script>
+
+</html>

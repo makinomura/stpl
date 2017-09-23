@@ -1,0 +1,14 @@
+{
+  "name": "stpl",
+  "version": "1.0.0",
+  "description": "A simple html template engine based on jquery.",
+  "main": "util.js",
+  "scripts": {
+    "build": "uglifyjs stpl.js -c -m -o stpl.min.js"
+  },
+  "author": "Maki",
+  "license": "MIT",
+  "dependencies": {
+    "uglify-js": "^3.1.1"
+  }
+}
