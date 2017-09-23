@@ -10,7 +10,7 @@ npm run build
 
 #### How to use
 
-* load jQuery script before load stpl.js
+* load jQuery script before load stpl.min.js
 
 * code 
 
