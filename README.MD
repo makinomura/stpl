@@ -1,4 +1,4 @@
-# ***SPL***
+# ***STPL***
 
 #### A simple html template engine based on jquery.
 
