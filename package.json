@@ -2,7 +2,7 @@
   "name": "stpl",
   "version": "1.0.0",
   "description": "A simple html template engine based on jquery.",
-  "main": "util.js",
+  "main": "stpl.js",
   "scripts": {
     "build": "uglifyjs stpl.js -c -m -o stpl.min.js"
   },
