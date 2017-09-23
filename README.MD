@@ -3,12 +3,12 @@
 #### A simple html template engine based on jquery.
 
 
-* use &nbsp;
+#### Build 
 <code>
 npm run build
-</code> &nbsp; to build.
+</code> 
 
-#### How to use
+#### Use
 
 * load jquery script before load stpl.min.js.
 
@@ -16,5 +16,7 @@ npm run build
 
    <code>$(selector).render(dataObj)</code>
 
-* view index.html in chrome.
-     
+#### Run
+<code>
+npm run dev
+</code> 

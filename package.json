@@ -4,11 +4,13 @@
   "description": "A simple html template engine based on jquery.",
   "main": "stpl.js",
   "scripts": {
-    "build": "uglifyjs stpl.js -c -m -o stpl.min.js"
+    "build": "uglifyjs stpl.js -c -m -o stpl.min.js",
+    "dev": "live-server"
   },
   "author": "Maki",
   "license": "MIT",
   "dependencies": {
+    "live-server": "^1.2.0",
     "uglify-js": "^3.1.1"
   }
 }
