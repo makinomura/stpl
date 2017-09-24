@@ -186,11 +186,10 @@ document.write('<style>\n' +
             var source = caller(sourceName);
 
             var do_for_fun = function (item, index, expression) {
-                return caller('(' + 'function (obj){' +
-                    'var ' + indexName + ' = ' + 'obj.index;' +
-                    'var ' + itemName + ' = ' + sourceName + '[obj.index];' +
-                    'return eval(obj.exp);' +
-                    '}' + ').call(' + sourceName + '[' + index + '],' + '{index: ' + index + ',exp: \"' + expression.split('"').join('\\"') + '\"})');
+                return caller('(function (){' +
+                    'var ' + indexName + ' = ' + index + ';' +
+                    'var ' + itemName + ' = ' + sourceName + '[' + index + '];' +
+                    'return eval(\"' + expression.split('"').join('\\"') + '\");})()');
             };
 
             if (source instanceof Array) {
