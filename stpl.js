@@ -95,7 +95,7 @@ document.write('<style>\n' +
                         result = result.call($element[0]);
                     }
 
-                    if (result === false || flag === 'false') {
+                    if (result === false || result === 'false') {
                         $element.remove();
                         return false;
                     }
