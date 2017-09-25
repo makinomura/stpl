@@ -135,6 +135,7 @@ document.write('<style>\n' +
          * @param caller
          */
         var do_events = function ($element, caller) {
+            var eventAttrs = [];
 
             $.each($element[0].attributes, function (index, attrNode) {
                 var value = $.trim(attrNode.value);
@@ -143,19 +144,22 @@ document.write('<style>\n' +
                 if (new RegExp('^' + M_ON + '\\S+').test(attrName)) {
                     var eventName = attrName.replace(new RegExp('^' + M_ON + '(\\S+)'), '$1');
 
-                    var flag = $element.attr(attrName);
-                    if (flag) {
+                    if (value) {
                         $element.on(eventName, function () {
-                            var result = caller(flag);
+                            var result = caller(value);
                             if (result instanceof Function) {
                                 result.apply(this, arguments);
                             }
                         });
-                        $element.removeAttr(attrName);
+                        eventAttrs.push(attrName);
                     }
                 }
 
             });
+
+            $.each(eventAttrs, function (i, n) {
+                $element.removeAttr(n);
+            })
         };
 
         /**
@@ -259,7 +263,7 @@ document.write('<style>\n' +
             callback.call(this, obj);
         }
         $this.fadeIn();
-        $this.removeAttr('m-render');
+        $this.removeAttr(M_RENDER);
 
         return $this;
     };
